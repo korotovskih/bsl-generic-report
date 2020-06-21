@@ -40,10 +40,10 @@ import java.util.concurrent.Callable;
         description = "make coverage report")
 class GenericReport implements Callable<Integer> {
 
-    @Parameters(index = "0", description = "*.bsl")
+    @Parameters(index = "0", description = "directory containing * .bsl files")
     private File infile;
 
-    @Parameters(index = "1", description = "*.xml")
+    @Parameters(index = "1", description = "result file name, e.g. result.xml")
     private File outFile;
 
     public static void main(String... args) {
@@ -100,7 +100,7 @@ class GenericReport implements Callable<Integer> {
     public Integer call() throws Exception {
 
         List<File> lst = new ArrayList<>();
-        bslFormFolder(infile, lst);
+        bslFormFolder(infile.getAbsoluteFile(), lst);
 
         DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder icBuilder = icFactory.newDocumentBuilder();
@@ -129,7 +129,7 @@ class GenericReport implements Callable<Integer> {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(doc);
-        StreamResult stream = new StreamResult(new FileOutputStream(outFile));
+        StreamResult stream = new StreamResult(new FileOutputStream(outFile.getAbsoluteFile()));
 
         transformer.transform(source, stream);
         return 0;
