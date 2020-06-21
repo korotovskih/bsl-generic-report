@@ -6,9 +6,9 @@ import com.github._1c_syntax.bsl.parser.Tokenizer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 import org.antlr.v4.runtime.tree.TerminalNodeImpl;
@@ -22,15 +22,16 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.awt.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import java.net.URI;
+
 import java.nio.file.Path;
 import java.nio.file.Files;
-import java.math.BigInteger;
-import java.security.MessageDigest;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -57,6 +58,13 @@ class GenericReport implements Callable<Integer> {
                 || node instanceof BSLParser.Var_nameContext;
     }
 
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
+
     public void bslFormFolder(File folder, List<File> lst)
     {
         File[] folderEntries = folder.listFiles();
@@ -67,7 +75,11 @@ class GenericReport implements Callable<Integer> {
                 bslFormFolder(entry, lst);
                 continue;
             }
-            lst.add(entry);
+            String ext = getFileExtension(entry);
+            if (ext.equals("bsl"))
+            {
+                lst.add(entry);
+            }
         }
     }
 

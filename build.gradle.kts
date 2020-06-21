@@ -1,7 +1,7 @@
 import java.net.URI
 
 plugins {
-    java
+    application
 }
 
 group = "com.github.korotovskih"
@@ -12,8 +12,13 @@ repositories {
     maven { url = URI("https://jitpack.io") }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 dependencies {
-    testCompile("junit", "junit", "4.12")
+    testImplementation("junit", "junit", "4.12")
     implementation("info.picocli", "picocli", "4.3.2")
     implementation("com.github.1c-syntax", "bsl-parser", "0.14.1") {
         exclude("com.tunnelvisionlabs", "antlr4-annotations")
@@ -25,6 +30,6 @@ dependencies {
     }
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+application {
+    mainClassName = "com.github.korotovskih.bsl.GenericReport"
 }
