@@ -8,7 +8,7 @@
 bsl-generic-report make src report.xml
 ```
 
-## Usage
+## usage
 
 ```shell script
 Usage: make [-hV] <infile> <outFile>
