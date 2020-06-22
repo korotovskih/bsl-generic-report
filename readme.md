@@ -5,13 +5,13 @@
 ## example
 
 ```shell script
-bsl-generic-report make src report.xml
+bsl-generic-report src report.xml
 ```
 
 ## usage
 
 ```shell script
-Usage: make [-hV] <infile> <outFile>
+Usage: bsl-generic-report [-hV] <infile> <outFile>
 make coverage report
       <infile>    каталог содержащий файлы *.bsl
       <outFile>   имя файла результата result.xml

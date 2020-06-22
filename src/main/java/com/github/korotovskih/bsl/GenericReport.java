@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-@Command(name = "make", mixinStandardHelpOptions = true, version = "1.0",
+@Command(name = "bsl-generic-report", mixinStandardHelpOptions = true, version = "1.0",
         description = "make coverage report")
 class GenericReport implements Callable<Integer> {
 
